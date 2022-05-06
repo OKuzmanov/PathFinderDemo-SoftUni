@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="myHead">
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,34 +17,39 @@
             crossorigin=""></script>
 </head>
 <body>
-    <nav class="main-nav" th:fragment="myNavigation">
-        <ul>
+<nav class="main-nav" th:fragment="myNavigation">
+    <ul>
+        <th:block th:if="${@currentUser.id == null}">
             <li>
                 <a href="/">Home</a>
             </li>
             <li>
-                <a href="/">Login</a>
+                <a href="/users/login">Login</a>
             </li>
             <li>
-                <a href="/">Register</a>
+                <a href="/users/register">Register</a>
             </li>
             <li>
-                <a href="/">About</a>
+                <a href="/about">About</a>
             </li>
-            <li>
-                <a href="/">Add new route</a>
-            </li>
-            <li>
-                <a href="/">Profile</a>
-            </li>
-            <li>
-                <a href="/">Admin</a>
-            </li>
-            <li>
-                <a href="/">Logout</a>
-            </li>
-        </ul>
-    </nav>
+            </th:block>
+
+            <th:block th:unless="${@currentUser.id == null}">
+                <li>
+                    <a href="/">Add new route</a>
+                </li>
+                <li>
+                    <a th:href="@{/users/profile/{id}(id= ${@currentUser.getId()})}">Profile</a>
+                </li>
+                <li>
+                    <a href="/">Admin</a>
+                </li>
+                <li>
+                    <a href="/users/logout">Logout</a>
+                </li>
+            </th:block>
+    </ul>
+</nav>
 
 <footer class="footer bg-blur rounded" th:fragment="myFooter">
     <div class="container-fluid text-center">

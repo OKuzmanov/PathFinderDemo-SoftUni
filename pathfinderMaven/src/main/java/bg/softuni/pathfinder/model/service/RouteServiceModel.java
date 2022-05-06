@@ -1,48 +1,31 @@
-package bg.softuni.pathfinder.model.entities;
+package bg.softuni.pathfinder.model.service;
 
+import bg.softuni.pathfinder.model.entities.CategoryEntity;
+import bg.softuni.pathfinder.model.entities.PictureEntity;
+import bg.softuni.pathfinder.model.entities.UserEntity;
 import bg.softuni.pathfinder.model.enums.LevelEnum;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name = "routes")
-public class RouteEntity extends BaseEntity{
-
-    @Column(columnDefinition = "text")
+public class RouteServiceModel extends BaseServiceModel {
     private String description;
 
-    @Column(columnDefinition = "longtext")
     private String gpxCoordinates;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "level")
     private LevelEnum level;
 
-    @Column(nullable = false, unique = true)
     private String name;
 
-    @Column(name = "video_url")
     private String videoUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private UserEntity author;
 
-    @ManyToMany
-    @LazyCollection(LazyCollectionOption.FALSE)
-    @JoinTable(name = "routes_categories",
-    joinColumns = @JoinColumn(name = "route_entity_id", referencedColumnName = "id"),
-    inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private List<CategoryEntity> categories;
 
-    @OneToMany(mappedBy = "route", targetEntity = PictureEntity.class, fetch = FetchType.EAGER)
     private Set<PictureEntity> pictures;
 
-    public RouteEntity() {
+    public RouteServiceModel() {
     }
 
     public String getDescription() {

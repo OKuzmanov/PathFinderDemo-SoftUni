@@ -10,11 +10,11 @@
         <nav class="main-nav" th:replace="fragments/commons::myNavigation"></nav>
     </header>
 
-    <section class="road">
-        <img src="/images/pic4.jpg" alt="Title image">
+    <section class="road" th:each="route : ${routeViews}" th:object="${route}">
+        <img th:each="photo : ${route.pictures}" th:object="${photo}" th:src="*{url}" th:alt="*{title}">
         <div>
-            <h2>Your Route</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae alias reiciendis deleniti possimus nemo
+            <h2 th:text="*{name}">Your Route</h2>
+            <p th:text="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae alias reiciendis deleniti possimus nemo
                 non repellendus?
                 Quae atque vero modi quidem! Autem cupiditate fugit doloribus ad amet, asperiores provident commodi.</p>
             <a href="/" class="btn">Learn More</a>
