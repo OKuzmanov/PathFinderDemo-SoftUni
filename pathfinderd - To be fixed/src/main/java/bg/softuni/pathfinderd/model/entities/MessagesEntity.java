@@ -1,4 +1,4 @@
-package bg.softuni.pathfinder.model.entities;
+package bg.softuni.pathfinderd.model.entities;
 
 import javax.persistence.Column;
 import javax.persistence.JoinColumn;

@@ -1,4 +1,4 @@
-package bg.softuni.pathfinder.model.entities;
+package bg.softuni.pathfinderd.model.entities;
 
 import bg.softuni.pathfinder.model.enums.CategoryEnum;
 

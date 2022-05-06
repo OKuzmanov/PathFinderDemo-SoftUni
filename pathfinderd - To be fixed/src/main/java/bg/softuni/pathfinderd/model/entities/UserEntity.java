@@ -1,6 +1,6 @@
-package bg.softuni.pathfinder.model.entities;
+package bg.softuni.pathfinderd.model.entities;
 
-import bg.softuni.pathfinder.model.enums.LevelEnum;
+import bg.softuni.pathfinderd.model.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.List;
