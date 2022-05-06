@@ -1,17 +1,14 @@
-package bg.softuni.pathfinderd.model.entities;
+package bg.softuni.pathfinder.model.entities;
 
-import bg.softuni.pathfinderd.model.enums.CategoryEnum;
+import bg.softuni.pathfinder.model.enums.CategoryEnum;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Enumerated;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "categories")
 public class CategoryEntity extends BaseEntity{
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, unique = true)
     private CategoryEnum name;
 

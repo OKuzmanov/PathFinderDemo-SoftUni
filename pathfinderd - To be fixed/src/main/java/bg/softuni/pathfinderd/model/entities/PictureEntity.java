@@ -1,4 +1,4 @@
-package bg.softuni.pathfinderd.model.entities;
+package bg.softuni.pathfinder.model.entities;
 
 import javax.persistence.*;
 

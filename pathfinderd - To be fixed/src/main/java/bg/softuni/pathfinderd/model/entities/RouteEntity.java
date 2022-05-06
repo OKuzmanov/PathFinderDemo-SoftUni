@@ -1,9 +1,10 @@
-package bg.softuni.pathfinderd.model.entities;
+package bg.softuni.pathfinder.model.entities;
 
-import bg.softuni.pathfinderd.model.enums.LevelEnum;
+import bg.softuni.pathfinder.model.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "routes")
@@ -16,7 +17,7 @@ public class RouteEntity extends BaseEntity{
     private String gpxCoordinates;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "level_enum")
+    @Column(name = "level")
     private LevelEnum level;
 
     @Column(nullable = false, unique = true)
@@ -26,7 +27,7 @@ public class RouteEntity extends BaseEntity{
     private String videoUrl;
 
     @ManyToOne
-    @JoinColumn(name = "author_id", referencedColumnName = "id", unique = true)
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
     private UserEntity author;
 
     @ManyToMany
@@ -34,6 +35,9 @@ public class RouteEntity extends BaseEntity{
     joinColumns = @JoinColumn(name = "route_entity_id", referencedColumnName = "id"),
     inverseJoinColumns = @JoinColumn(name = "categories_id", referencedColumnName = "id"))
     private List<CategoryEntity> categories;
+
+    @OneToMany(mappedBy = "route", targetEntity = PictureEntity.class, fetch = FetchType.EAGER)
+    private Set<PictureEntity> pictures;
 
     public RouteEntity() {
     }

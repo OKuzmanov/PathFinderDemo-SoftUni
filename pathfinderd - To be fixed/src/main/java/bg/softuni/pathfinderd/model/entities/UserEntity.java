@@ -1,6 +1,6 @@
-package bg.softuni.pathfinderd.model.entities;
+package bg.softuni.pathfinder.model.entities;
 
-import bg.softuni.pathfinderd.model.enums.LevelEnum;
+import bg.softuni.pathfinder.model.enums.LevelEnum;
 
 import javax.persistence.*;
 import java.util.List;
@@ -18,7 +18,7 @@ public class UserEntity extends BaseEntity{
     private String email;
 
     @Column(nullable = false)
-    private String fullname;
+    private String fullName;
 
     private int age;
 
@@ -27,8 +27,8 @@ public class UserEntity extends BaseEntity{
 
     @ManyToMany
     @JoinTable(name = "users_roles",
-    joinColumns = @JoinColumn(name = "user_entity_id", referencedColumnName = "id", nullable = false),
-    inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id",nullable = false, unique = true))
+    joinColumns = @JoinColumn(name = "user_entity_id", referencedColumnName = "id"),
+    inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "id"))
     private List<RoleEntity> roles;
 
     public UserEntity() {
@@ -59,11 +59,11 @@ public class UserEntity extends BaseEntity{
     }
 
     public String getFullname() {
-        return fullname;
+        return fullName;
     }
 
     public void setFullname(String fullname) {
-        this.fullname = fullname;
+        this.fullName = fullname;
     }
 
     public int getAge() {
