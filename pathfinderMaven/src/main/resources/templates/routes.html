@@ -11,13 +11,13 @@
     </header>
 
     <section class="road" th:each="route : ${routeViews}" th:object="${route}">
-        <img th:each="photo : ${route.pictures}" th:object="${photo}" th:src="*{url}" th:alt="*{title}">
+        <img th:src="*{picture.getUrl()}" th:alt="*{picture.getTitle()}">
         <div>
             <h2 th:text="*{name}">Your Route</h2>
             <p th:text="*{description}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae alias reiciendis deleniti possimus nemo
                 non repellendus?
                 Quae atque vero modi quidem! Autem cupiditate fugit doloribus ad amet, asperiores provident commodi.</p>
-            <a href="/" class="btn">Learn More</a>
+            <a th:href="@{/routes/details/{id}(id= *{id})}" class="btn">Learn More</a>
         </div>
     </section>
 </div>

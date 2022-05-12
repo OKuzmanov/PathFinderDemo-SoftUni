@@ -59,4 +59,19 @@ public class UserServiceImpl implements UserService {
         this.currentUser.setId(null);
         this.currentUser.setUsername(null);
     }
+
+    @Override
+    public boolean isLoggedIn() {
+        if(this.currentUser.getId() == null) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public UserServiceModel findCurrentUserById() {
+        return this.userRepo.findById(this.currentUser.getId())
+                .map(userEntity -> this.modelMapper.map(userEntity, UserServiceModel.class))
+                .orElse(null);
+    }
 }

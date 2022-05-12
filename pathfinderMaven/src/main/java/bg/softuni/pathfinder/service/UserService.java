@@ -15,4 +15,8 @@ public interface UserService {
     void loginUser(UserServiceModel userServiceModel);
 
     void logOut();
+
+    boolean isLoggedIn();
+
+    UserServiceModel findCurrentUserById();
 }

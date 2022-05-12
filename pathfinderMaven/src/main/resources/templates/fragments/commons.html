@@ -36,7 +36,7 @@
 
             <th:block th:unless="${@currentUser.id == null}">
                 <li>
-                    <a href="/">Add new route</a>
+                    <a href="/routes/add">Add new route</a>
                 </li>
                 <li>
                     <a th:href="@{/users/profile/{id}(id= ${@currentUser.getId()})}">Profile</a>

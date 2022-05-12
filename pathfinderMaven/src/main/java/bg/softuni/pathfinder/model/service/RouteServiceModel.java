@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 public class RouteServiceModel extends BaseServiceModel {
+    private Long id;
     private String description;
 
     private String gpxCoordinates;
@@ -90,5 +91,15 @@ public class RouteServiceModel extends BaseServiceModel {
 
     public void setPictures(Set<PictureEntity> pictures) {
         this.pictures = pictures;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.id = id;
     }
 }
