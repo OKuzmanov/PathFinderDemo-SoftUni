@@ -10,7 +10,7 @@
         <nav class="main-nav" th:replace="fragments/commons::myNavigation"></nav>
     </header>
 
-    <section class="road" th:each="route : ${carRoutes}" th:object="${route}">
+    <section class="road" th:each="route : ${filteredRoutes}" th:object="${route}">
         <div>
             <h2 th:text="*{name}">Title</h2>
             <p th:text="*{description}">Very long description</p>

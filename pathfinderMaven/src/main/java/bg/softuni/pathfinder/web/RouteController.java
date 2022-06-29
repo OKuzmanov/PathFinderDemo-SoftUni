@@ -106,11 +106,13 @@ public class RouteController {
         return new RouteAddBindingModel();
     }
 
-    @GetMapping("/pedestrian")
-    private String getPedestrianRoutes(Model model) {
-        List<RouteServiceModel> routeServiceModels = this.routeService.findAllByCategory(CategoryEnum.PEDESTRIAN);
+    @GetMapping("/{enum}")
+    private String getPedestrianRoutes(Model model, @PathVariable("enum") String category) {
+        String var = category.toUpperCase();
+        CategoryEnum categoryEnum = CategoryEnum.valueOf(var);
+        List<RouteServiceModel> routeServiceModels = this.routeService.findAllByCategory(categoryEnum);
 
-        model.addAttribute("pedestrianRoutes", routeServiceModels.stream()
+        model.addAttribute("filteredRoutes", routeServiceModels.stream()
                 .map(r -> {
                     RouteMiniViewModel routeMiniViewModel = this.modelMapper.map(r, RouteMiniViewModel.class);
                     routeMiniViewModel.setPicture(choosePictureViewToSend(r));
@@ -118,52 +120,13 @@ public class RouteController {
                 })
                 .collect(Collectors.toList()));
 
-        return "pedestrian";
-    }
-
-    @GetMapping("/bicycle")
-    private String getBicycleRoutes(Model model) {
-        List<RouteServiceModel> routeServiceModels = this.routeService.findAllByCategory(CategoryEnum.BICYCLE);
-
-        model.addAttribute("bicycleRoutes", routeServiceModels.stream()
-                .map(r -> {
-                    RouteMiniViewModel routeMiniViewModel = this.modelMapper.map(r, RouteMiniViewModel.class);
-                    routeMiniViewModel.setPicture(choosePictureViewToSend(r));
-                    return routeMiniViewModel;
-                })
-                .collect(Collectors.toList()));
-
-        return "bicycle";
-    }
-
-    @GetMapping("/motorcycle")
-    private String getMotorcycleRoutes(Model model) {
-        List<RouteServiceModel> routeServiceModels = this.routeService.findAllByCategory(CategoryEnum.MOTORCYCLE);
-
-        model.addAttribute("motorcycleRoutes", routeServiceModels.stream()
-                .map(r -> {
-                    RouteMiniViewModel routeMiniViewModel = this.modelMapper.map(r, RouteMiniViewModel.class);
-                    routeMiniViewModel.setPicture(choosePictureViewToSend(r));
-                    return routeMiniViewModel;
-                })
-                .collect(Collectors.toList()));
-
-        return "motorcycle";
-    }
-
-    @GetMapping("/car")
-    private String getCarRoutes(Model model) {
-        List<RouteServiceModel> routeServiceModels = this.routeService.findAllByCategory(CategoryEnum.CAR);
-
-        model.addAttribute("carRoutes", routeServiceModels.stream()
-                .map(r -> {
-                    RouteMiniViewModel routeMiniViewModel = this.modelMapper.map(r, RouteMiniViewModel.class);
-                    routeMiniViewModel.setPicture(choosePictureViewToSend(r));
-                    return routeMiniViewModel;
-                })
-                .collect(Collectors.toList()));
-
-        return "car";
+        switch(category) {
+            case "pedestrian": return "pedestrian";
+            case "bicycle": return "bicycle";
+            case "motorcycle": return "motorcycle";
+            case "car": return "car";
+            default: return "index";
+        }
     }
 
     private PictureView choosePictureViewToSend(RouteServiceModel r) {
